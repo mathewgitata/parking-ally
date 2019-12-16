@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">ParkingAlly</string>
+    <string name="slogan">Easy Car Park Find.</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="prompt_login">Already have a ParkingAlly account?</string>
+    <string name="log_in">Log In</string>
+    <string name="terms_and_privacy_policy">By using ParkingAlly, you agree to our <u>Terms of Use</u> and <u>Privacy Policy</u>.</string>
 </resources>

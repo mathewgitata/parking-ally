@@ -8,4 +8,29 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Remove Action Bar-->
+    <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="colorPrimaryDark">@color/colorAccent</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!--White buttons text style -->
+    <style name="white_button_text">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/lucida_grande_regular</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <!--Red buttons text style -->
+    <style name="red_button_text">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/lucida_grande_regular</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
 </resources>
