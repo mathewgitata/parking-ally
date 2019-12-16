@@ -33,4 +33,12 @@
         <item name="android:textAllCaps">false</item>
     </style>
 
+    <!--Edit text inputs text style -->
+    <style name="edit_text_inputs">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/helvetica_neue_medium</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
 </resources>
