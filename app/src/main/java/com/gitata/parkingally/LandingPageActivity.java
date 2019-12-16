@@ -12,6 +12,13 @@ public class LandingPageActivity extends AppCompatActivity {
 
     public static final String TAG = "MainActivity";
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_landing_page);
+        ButterKnife.bind(this);
+    }
+
     @OnClick(R.id.landing_btn_sign_up)
     public void onSignUpButtonClick() {
         Log.i(TAG, "SignUpClick");
@@ -22,12 +29,5 @@ public class LandingPageActivity extends AppCompatActivity {
     public void onLoginButtonClick() {
         Log.i(TAG, "LoginClick");
         //TODO: Redirect user to Registration Page
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_landing_page);
-        ButterKnife.bind(this);
     }
 }
