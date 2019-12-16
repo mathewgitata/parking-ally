@@ -2,6 +2,7 @@ package com.gitata.parkingally;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -21,8 +22,8 @@ public class LandingPageActivity extends AppCompatActivity {
 
     @OnClick(R.id.landing_btn_sign_up)
     public void onSignUpButtonClick() {
-        Log.i(TAG, "SignUpClick");
-        //TODO: Redirect user to Registration Page
+        Intent toSignUp = new Intent(LandingPageActivity.this, RegistrationActivity.class);
+        startActivity(toSignUp);
     }
 
     @OnClick(R.id.landing_btn_login)
