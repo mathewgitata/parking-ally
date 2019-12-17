@@ -5,4 +5,9 @@
     <string name="prompt_login">Already have a ParkingAlly account?</string>
     <string name="log_in">Log In</string>
     <string name="terms_and_privacy_policy">By using ParkingAlly, you agree to our <u>Terms of Use</u> and <u>Privacy Policy</u>.</string>
+    <string name="email_address">Email</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="password">Password</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
 </resources>
