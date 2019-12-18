@@ -28,7 +28,7 @@ public class LandingPageActivity extends AppCompatActivity {
 
     @OnClick(R.id.landing_btn_login)
     public void onLoginButtonClick() {
-        Log.i(TAG, "LoginClick");
-        //TODO: Redirect user to Registration Page
+        Intent toSignUp = new Intent(LandingPageActivity.this, LoginActivity.class);
+        startActivity(toSignUp);
     }
 }
