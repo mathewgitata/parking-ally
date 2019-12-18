@@ -14,12 +14,13 @@
         android:layout_height="?attr/actionBarSize"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:background="@color/colorPrimaryDark"
+        android:background="@color/colorAccent"
         android:fontFamily="@font/coquette_bold"
         android:gravity="center"
         android:text="@string/app_name"
         android:textColor="@color/white"
         android:textSize="20sp" />
+
 
     <TextView
         android:id="@+id/tvPromptLogIn"
@@ -39,7 +40,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvPromptLogIn"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         android:width="300dp"
         android:background="@drawable/et_white_boarder"
         android:fontFamily="@font/helvetica_neue_medium"
