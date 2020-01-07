@@ -1,8 +1,10 @@
-package com.gitata.parkingally;
+package com.gitata.parkingally.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.gitata.parkingally.R;
 
 public class RegistrationActivity extends AppCompatActivity {
 
