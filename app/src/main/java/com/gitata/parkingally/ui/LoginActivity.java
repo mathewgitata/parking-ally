@@ -22,12 +22,9 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent toLogin = new Intent(LoginActivity.this, RegistrationActivity.class);
-                startActivity(toLogin);
-            }
+        loginBtn.setOnClickListener(v -> {
+            Intent toLogin = new Intent(LoginActivity.this, RegistrationActivity.class);
+            startActivity(toLogin);
         });
     }
 
