@@ -1,4 +1,4 @@
-package com.gitata.parkingally;
+package com.gitata.parkingally.network;
 
 import java.io.IOException;
 
@@ -9,8 +9,8 @@ import okhttp3.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-import static com.gitata.parkingally.Constants.EMEL_API_KEY;
-import static com.gitata.parkingally.Constants.EMEL_BASE_URL;
+import static com.gitata.parkingally.network.Constants.EMEL_API_KEY;
+import static com.gitata.parkingally.network.Constants.EMEL_BASE_URL;
 
 public class EmelParkingClient {
     private static Retrofit retrofit = null;

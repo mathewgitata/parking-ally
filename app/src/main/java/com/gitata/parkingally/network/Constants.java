@@ -1,4 +1,6 @@
-package com.gitata.parkingally;
+package com.gitata.parkingally.network;
+
+import com.gitata.parkingally.BuildConfig;
 
 public class Constants {
     public static final String EMEL_BASE_URL = "https://emel.city-platform.com/opendata/";
