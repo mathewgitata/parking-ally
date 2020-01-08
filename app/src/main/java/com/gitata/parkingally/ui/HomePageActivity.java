@@ -5,9 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import com.gitata.parkingally.EmelParkingApi;
-import com.gitata.parkingally.EmelParkingClient;
-import com.gitata.parkingally.EmelParkingSearchResponse;
+import com.gitata.parkingally.network.EmelParkingApi;
+import com.gitata.parkingally.network.EmelParkingClient;
+import com.gitata.parkingally.models.EmelParkingLotResponse;
 import com.gitata.parkingally.R;
 
 import java.util.List;
@@ -29,16 +29,16 @@ public class HomePageActivity extends AppCompatActivity {
 
         EmelParkingApi client = EmelParkingClient.getClient();
 
-        Call<List<EmelParkingSearchResponse>> call = client.getParkingLots();
-        call.enqueue(new Callback<List<EmelParkingSearchResponse>>() {
+        Call<List<EmelParkingLotResponse>> call = client.getParkingLots();
+        call.enqueue(new Callback<List<EmelParkingLotResponse>>() {
             @Override
-            public void onResponse(Call<List<EmelParkingSearchResponse>> call, Response<List<EmelParkingSearchResponse>> response) {
+            public void onResponse(Call<List<EmelParkingLotResponse>> call, Response<List<EmelParkingLotResponse>> response) {
                 if (!response.isSuccessful()) {
                     textViewResult.setText("Code: " + response.code());
                     return;
                 }
-                List<EmelParkingSearchResponse> parkingLots = response.body();
-                for (EmelParkingSearchResponse parkingLot : parkingLots) {
+                List<EmelParkingLotResponse> parkingLots = response.body();
+                for (EmelParkingLotResponse parkingLot : parkingLots) {
                     String content = "";
                     content += "Capacity: " + parkingLot.getMaxCapacity();
                     textViewResult.setText(content);
@@ -46,7 +46,7 @@ public class HomePageActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<EmelParkingSearchResponse>> call, Throwable t) {
+            public void onFailure(Call<List<EmelParkingLotResponse>> call, Throwable t) {
                 textViewResult.setText(t.getMessage());
             }
         });

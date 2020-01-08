@@ -1,14 +1,14 @@
 
-package com.gitata.parkingally;
+package com.gitata.parkingally.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class EmelParkingSearchResponse {
+public class EmelParkingLotResponse {
 
     @SerializedName("id_parque")
     @Expose
-    private Integer parkId;
+    private String parkId;
     @SerializedName("name")
     @Expose
     private String name;
@@ -41,7 +41,7 @@ public class EmelParkingSearchResponse {
      * No args constructor for use in serialization
      * 
      */
-    public EmelParkingSearchResponse() {
+    public EmelParkingLotResponse() {
     }
 
     /**
@@ -57,7 +57,7 @@ public class EmelParkingSearchResponse {
      * @param occupationDate
      * @param longitude
      */
-    public EmelParkingSearchResponse(Integer parkId, String name, Integer active, Integer entityId, Integer maxCapacity, Integer occupation, String occupationDate, String latitude, String longitude, String type) {
+    public EmelParkingLotResponse(String parkId, String name, Integer active, Integer entityId, Integer maxCapacity, Integer occupation, String occupationDate, String latitude, String longitude, String type) {
         super();
         this.parkId = parkId;
         this.name = name;
@@ -71,11 +71,11 @@ public class EmelParkingSearchResponse {
         this.type = type;
     }
 
-    public Integer getParkId() {
+    public String getParkId() {
         return parkId;
     }
 
-    public void setParkId(Integer parkId) {
+    public void setParkId(String parkId) {
         this.parkId = parkId;
     }
 
