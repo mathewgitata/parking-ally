@@ -3,6 +3,7 @@ package com.gitata.parkingally.ui;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -29,7 +30,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     EditText etPhoneNumber;
     @BindView(R.id.registration_et_password)
     EditText etPassword;
-
 
 
     @Override
@@ -97,7 +97,8 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private void registerUser() {
         hideKeyboard(RegistrationActivity.this);
-        //TODO:Redirect user to homepage
+        Intent toHomePage = new Intent(RegistrationActivity.this, HomePageActivity.class);
+        startActivity(toHomePage);
     }
 
     private void hideKeyboard(Activity activity) {
