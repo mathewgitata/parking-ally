@@ -9,7 +9,7 @@ public class EmelParkingLotResponse {
     @SerializedName("id_parque")
     @Expose
     private String parkId;
-    @SerializedName("name")
+    @SerializedName("nome")
     @Expose
     private String name;
     @SerializedName("active")
