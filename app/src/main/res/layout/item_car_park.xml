@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/rl_itemCarPark"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:clickable="true"
+    android:focusable="true">
+
+    <TextView
+        android:id="@+id/tv_parking_lot_name"
+        android:layout_width="match_parent"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@id/tv_location_icon"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/helvetica_neue_medium"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/tv_location_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/tv_parking_lot_name"
+        android:layout_alignParentStart="true"
+        android:drawableStart="@drawable/ic_location"
+        android:paddingStart="15dp"
+        android:paddingEnd="20dp"
+        tools:ignore="RtlSymmetry"/>
+
+    <TextView
+        android:id="@+id/tv_capacity"
+        android:layout_width="match_parent"
+        android:layout_toEndOf="@id/tv_location_icon"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_below="@+id/tv_parking_lot_name"
+        android:fontFamily="@font/lucida_grande_regular"
+        android:textColor="@color/faded_black"
+        android:textSize="14sp" />
+
+</RelativeLayout>
