@@ -55,7 +55,6 @@ public class HomePageActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<EmelParkingLotResponse>> call, Throwable t) {
-
             }
         });
 
