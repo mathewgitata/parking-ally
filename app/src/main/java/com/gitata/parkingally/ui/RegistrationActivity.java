@@ -2,9 +2,12 @@ package com.gitata.parkingally.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -27,7 +30,6 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
     EditText etPhoneNumber;
     @BindView(R.id.registration_et_password)
     EditText etPassword;
-
 
 
     @Override
@@ -89,6 +91,22 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                     etPassword.requestFocus();
                     return;
                 }
+                registerUser();
         }
+    }
+
+    private void registerUser() {
+        hideKeyboard(RegistrationActivity.this);
+        Intent toHomePage = new Intent(RegistrationActivity.this, HomePageActivity.class);
+        startActivity(toHomePage);
+    }
+
+    private void hideKeyboard(Activity activity) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = activity.getCurrentFocus();
+        if (view == null) {
+            view = new View(activity);
+        }
+        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 }
