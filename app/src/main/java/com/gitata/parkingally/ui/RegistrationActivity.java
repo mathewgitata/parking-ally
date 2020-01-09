@@ -97,7 +97,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private void registerUser() {
         hideKeyboard(RegistrationActivity.this);
-        Intent toHomePage = new Intent(RegistrationActivity.this, HomePageActivity.class);
+        Intent toHomePage = new Intent(RegistrationActivity.this, ParkingLotListActivity.class);
         startActivity(toHomePage);
     }
 

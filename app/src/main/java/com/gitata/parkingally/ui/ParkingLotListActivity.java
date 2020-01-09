@@ -5,7 +5,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.util.Log;
 
 import com.gitata.parkingally.R;
 import com.gitata.parkingally.adapters.ParkingLotAdapter;
@@ -22,7 +21,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class HomePageActivity extends AppCompatActivity {
+public class ParkingLotListActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
     private ParkingLotAdapter mAdapter;
@@ -31,7 +30,7 @@ public class HomePageActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_page);
+        setContentView(R.layout.activity_parking_lot_list);
         ButterKnife.bind(this);
 
         EmelParkingApi client = EmelParkingClient.getClient();
@@ -42,10 +41,10 @@ public class HomePageActivity extends AppCompatActivity {
             public void onResponse(Call<List<EmelParkingLotResponse>> call, Response<List<EmelParkingLotResponse>> response) {
                 if (response.isSuccessful()) {
                     mParkingLotsList.addAll(response.body());
-                    mAdapter = new ParkingLotAdapter(HomePageActivity.this, mParkingLotsList);
+                    mAdapter = new ParkingLotAdapter(ParkingLotListActivity.this, mParkingLotsList);
 
                     RecyclerView.LayoutManager layoutManager =
-                            new LinearLayoutManager(HomePageActivity.this);
+                            new LinearLayoutManager(ParkingLotListActivity.this);
                     mRecyclerView.setLayoutManager(layoutManager);
                     mRecyclerView.setHasFixedSize(true);
 

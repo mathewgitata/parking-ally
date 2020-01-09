@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.ParkingLotDetailFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:paddingLeft="10dp"
+            android:paddingTop="20dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="20dp">
+
+
+            <ImageView
+                android:id="@+id/imgCarParkImage"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="10dp"
+                android:contentDescription="@string/car_park_image"
+                android:src="@mipmap/parking_lot_image" />
+
+            <TextView
+                android:id="@+id/tvCarParkName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_toEndOf="@+id/imgCarParkImage"
+                android:fontFamily="@font/helvetica_neue_medium"
+                android:gravity="center"
+                android:textColor="@color/black"
+                android:textSize="24sp" />
+
+            <TextView
+                android:id="@+id/tv_operation_hours"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvCarParkName"
+                android:layout_marginTop="5dp"
+                android:layout_toEndOf="@+id/imgCarParkImage"
+                android:fontFamily="@font/lucida_grande_regular"
+                android:gravity="center"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="fill_parent"
+                android:layout_height="0.1dp"
+                android:layout_below="@id/imgCarParkImage"
+                android:layout_marginTop="15dp"
+                android:background="@color/colorAccent" />
+
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</FrameLayout>

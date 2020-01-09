@@ -61,7 +61,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void loginUser() {
         hideKeyboard(LoginActivity.this);
-        Intent toHomePage = new Intent(LoginActivity.this, HomePageActivity.class);
+        Intent toHomePage = new Intent(LoginActivity.this, ParkingLotListActivity.class);
         startActivity(toHomePage);
     }
 
