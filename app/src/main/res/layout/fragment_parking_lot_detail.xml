@@ -32,7 +32,7 @@
                 android:src="@mipmap/parking_lot_image" />
 
             <TextView
-                android:id="@+id/tvCarParkName"
+                android:id="@+id/parkingLotNameTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
@@ -43,10 +43,10 @@
                 android:textSize="24sp" />
 
             <TextView
-                android:id="@+id/tv_operation_hours"
+                android:id="@+id/updateDateTextView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@+id/tvCarParkName"
+                android:layout_below="@+id/parkingLotNameTextView"
                 android:layout_marginTop="5dp"
                 android:layout_toEndOf="@+id/imgCarParkImage"
                 android:fontFamily="@font/lucida_grande_regular"

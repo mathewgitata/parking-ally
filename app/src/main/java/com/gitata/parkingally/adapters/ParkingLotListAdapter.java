@@ -1,6 +1,7 @@
 package com.gitata.parkingally.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,24 +11,25 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.gitata.parkingally.R;
 import com.gitata.parkingally.models.EmelParkingLotResponse;
+import com.gitata.parkingally.ui.ParkingLotDetailActivity;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class ParkingLotAdapter extends RecyclerView.Adapter<ParkingLotAdapter.ParkingLotViewHolder> {
+public class ParkingLotListAdapter extends RecyclerView.Adapter<ParkingLotListAdapter.ParkingLotViewHolder> {
     private List<EmelParkingLotResponse> mParkingLots;
     private Context mContext;
 
 
-    public ParkingLotAdapter(Context context, List<EmelParkingLotResponse> parkingLots) {
+    public ParkingLotListAdapter(Context context, List<EmelParkingLotResponse> parkingLots) {
         mContext = context;
         mParkingLots = parkingLots;
     }
 
     @Override
-    public ParkingLotAdapter.ParkingLotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public ParkingLotListAdapter.ParkingLotViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         mContext=parent.getContext();
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_car_park, parent, false);
@@ -36,7 +38,7 @@ public class ParkingLotAdapter extends RecyclerView.Adapter<ParkingLotAdapter.Pa
     }
 
     @Override
-    public void onBindViewHolder(ParkingLotAdapter.ParkingLotViewHolder holder, int position) {
+    public void onBindViewHolder(ParkingLotListAdapter.ParkingLotViewHolder holder, int position) {
         holder.bindParkingLot(mParkingLots.get(position));
     }
 
@@ -45,7 +47,7 @@ public class ParkingLotAdapter extends RecyclerView.Adapter<ParkingLotAdapter.Pa
         return mParkingLots.size();
     }
 
-    public class ParkingLotViewHolder extends RecyclerView.ViewHolder {
+    public class ParkingLotViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.tv_parking_lot_name)
         TextView parkingLotName;
         @BindView(R.id.tv_capacity)
@@ -56,6 +58,7 @@ public class ParkingLotAdapter extends RecyclerView.Adapter<ParkingLotAdapter.Pa
         public ParkingLotViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(this);
             mContext = itemView.getContext();
         }
 
@@ -64,5 +67,11 @@ public class ParkingLotAdapter extends RecyclerView.Adapter<ParkingLotAdapter.Pa
             parkingLotCapacity.setText(parkingLot.getParkId());
         }
 
+        @Override
+        public void onClick(View v) {
+            int itemPosition = getLayoutPosition();
+            Intent intent = new Intent(mContext, ParkingLotDetailActivity.class);
+            mContext.startActivity(intent);
+        }
     }
 }

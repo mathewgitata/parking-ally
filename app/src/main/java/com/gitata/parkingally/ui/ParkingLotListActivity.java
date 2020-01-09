@@ -7,7 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 
 import com.gitata.parkingally.R;
-import com.gitata.parkingally.adapters.ParkingLotAdapter;
+import com.gitata.parkingally.adapters.ParkingLotListAdapter;
 import com.gitata.parkingally.models.EmelParkingLotResponse;
 import com.gitata.parkingally.network.EmelParkingApi;
 import com.gitata.parkingally.network.EmelParkingClient;
@@ -24,7 +24,7 @@ import retrofit2.Response;
 public class ParkingLotListActivity extends AppCompatActivity {
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
-    private ParkingLotAdapter mAdapter;
+    private ParkingLotListAdapter mAdapter;
     public ArrayList<EmelParkingLotResponse> mParkingLotsList = new ArrayList<>();
 
     @Override
@@ -41,7 +41,7 @@ public class ParkingLotListActivity extends AppCompatActivity {
             public void onResponse(Call<List<EmelParkingLotResponse>> call, Response<List<EmelParkingLotResponse>> response) {
                 if (response.isSuccessful()) {
                     mParkingLotsList.addAll(response.body());
-                    mAdapter = new ParkingLotAdapter(ParkingLotListActivity.this, mParkingLotsList);
+                    mAdapter = new ParkingLotListAdapter(ParkingLotListActivity.this, mParkingLotsList);
 
                     RecyclerView.LayoutManager layoutManager =
                             new LinearLayoutManager(ParkingLotListActivity.this);
