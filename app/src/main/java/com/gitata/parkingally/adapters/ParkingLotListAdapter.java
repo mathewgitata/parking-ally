@@ -13,6 +13,8 @@ import com.gitata.parkingally.R;
 import com.gitata.parkingally.models.EmelParkingLotResponse;
 import com.gitata.parkingally.ui.ParkingLotDetailActivity;
 
+import org.parceler.Parcels;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -53,8 +55,6 @@ public class ParkingLotListAdapter extends RecyclerView.Adapter<ParkingLotListAd
         @BindView(R.id.tv_capacity)
         TextView parkingLotCapacity;
 
-        private Context mContext;
-
         public ParkingLotViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
@@ -71,6 +71,8 @@ public class ParkingLotListAdapter extends RecyclerView.Adapter<ParkingLotListAd
         public void onClick(View v) {
             int itemPosition = getLayoutPosition();
             Intent intent = new Intent(mContext, ParkingLotDetailActivity.class);
+            intent.putExtra("position", itemPosition);
+            intent.putExtra("parkingLots", Parcels.wrap(mParkingLots));
             mContext.startActivity(intent);
         }
     }

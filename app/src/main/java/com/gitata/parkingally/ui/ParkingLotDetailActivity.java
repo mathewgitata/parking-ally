@@ -12,6 +12,7 @@ import com.gitata.parkingally.models.EmelParkingLotResponse;
 
 import org.parceler.Parcels;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;

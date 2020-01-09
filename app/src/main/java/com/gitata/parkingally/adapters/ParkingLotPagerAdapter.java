@@ -14,6 +14,7 @@ public class ParkingLotPagerAdapter extends FragmentPagerAdapter {
 
     public ParkingLotPagerAdapter(FragmentManager fm, int behavior, List<EmelParkingLotResponse> parkingLots) {
         super(fm, behavior);
+        mParkingLots = parkingLots;
     }
 
     @Override
