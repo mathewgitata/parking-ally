@@ -151,6 +151,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                                     ProgressBar mProgressBar = findViewById(R.id.progressBar);
                                     mProgressBar.setVisibility(View.INVISIBLE);
                                     if (task.isSuccessful()) {
+                                        hideKeyboard(RegistrationActivity.this);
                                         createUserInFirebaseDb(newUser.getUid(), newUser.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());
                                     } else {
                                         Log.d(TAG, "Error: " + task.getException().getLocalizedMessage());
