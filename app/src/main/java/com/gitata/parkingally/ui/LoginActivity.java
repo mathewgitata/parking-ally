@@ -49,6 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     etEmail.setError("You must provide email");
                     etEmail.requestFocus();
+                    return;
                 }
                 if (password.isEmpty()) {
                     etPassword.setError("You must provide password");
