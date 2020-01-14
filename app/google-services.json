@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "830429589247",
+    "firebase_url": "https://parking-ally-d2e87.firebaseio.com",
+    "project_id": "parking-ally-d2e87",
+    "storage_bucket": "parking-ally-d2e87.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:830429589247:android:cb05abd4646985fc9fe6ca",
+        "android_client_info": {
+          "package_name": "com.gitata.parkingally"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "830429589247-500tjatrbg83kicd4n1up05ng8ea44os.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.gitata.parkingally",
+            "certificate_hash": "cf479bcdf932d5cad8fd5e97e2b2d530f3d52c8d"
+          }
+        },
+        {
+          "client_id": "830429589247-8fcthi064claaq8nsv5rfe2rgublba5j.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLDWF7-BG7QRQADZrYd2p60XcyvwSBtfA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "830429589247-8fcthi064claaq8nsv5rfe2rgublba5j.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
