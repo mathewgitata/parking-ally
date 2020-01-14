@@ -52,7 +52,7 @@ public class ParkingLotListAdapter extends RecyclerView.Adapter<ParkingLotListAd
     public class ParkingLotViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         @BindView(R.id.tv_parking_lot_name)
         TextView parkingLotName;
-        @BindView(R.id.tv_capacity)
+        @BindView(R.id.tv_carpark_id)
         TextView parkingLotCapacity;
 
         public ParkingLotViewHolder(View itemView) {

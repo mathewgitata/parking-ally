@@ -24,7 +24,7 @@ public class EmelParkingLotResponse {
     @SerializedName("capacidade_max")
     @Expose
     private Integer maxCapacity;
-    @SerializedName("occupation")
+    @SerializedName("ocupacao")
     @Expose
     private Integer occupation;
     @SerializedName("data_ocupacao")

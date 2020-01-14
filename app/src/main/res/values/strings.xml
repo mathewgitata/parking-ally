@@ -17,4 +17,5 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="car_park_image">car park image</string>
+    <string name="last_updated_on">Last Updated On</string>
 </resources>

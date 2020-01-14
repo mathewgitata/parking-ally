@@ -123,26 +123,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             }
         })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        if (e instanceof FirebaseAuthInvalidCredentialsException) {
-                            hideKeyboard(LoginActivity.this);
-                            Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Invalid email/password combination", Snackbar.LENGTH_LONG);
-                            snackbar.show();
-                        } else if (e instanceof FirebaseAuthInvalidUserException) {
-                            hideKeyboard(LoginActivity.this);
-                            Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "No account with that email exists", Snackbar.LENGTH_LONG);
-                            snackbar.setAction("Register", v -> {
-                                Intent toRegister = new Intent(LoginActivity.this, RegistrationActivity.class);
-                                startActivity(toRegister);
-                            });
-                            snackbar.show();
-                        } else {
-                            hideKeyboard(LoginActivity.this);
-                            Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Error: " + e.getLocalizedMessage(), Snackbar.LENGTH_LONG);
-                            snackbar.show();
-                        }
+                .addOnFailureListener(e -> {
+                    if (e instanceof FirebaseAuthInvalidCredentialsException) {
+                        hideKeyboard(LoginActivity.this);
+                        Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Invalid email/password combination", Snackbar.LENGTH_LONG);
+                        snackbar.show();
+                    } else if (e instanceof FirebaseAuthInvalidUserException) {
+                        hideKeyboard(LoginActivity.this);
+                        Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "No account with that email exists", Snackbar.LENGTH_LONG);
+                        snackbar.setAction("Register", v -> {
+                            Intent toRegister = new Intent(LoginActivity.this, RegistrationActivity.class);
+                            startActivity(toRegister);
+                        });
+                        snackbar.show();
+                    } else {
+                        hideKeyboard(LoginActivity.this);
+                        Snackbar snackbar = Snackbar.make(findViewById(R.id.myCoordinatorLayout), "Error: " + e.getLocalizedMessage(), Snackbar.LENGTH_LONG);
+                        snackbar.show();
                     }
                 });
     }
