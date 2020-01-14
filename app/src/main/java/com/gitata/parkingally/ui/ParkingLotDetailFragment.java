@@ -25,6 +25,12 @@ public class ParkingLotDetailFragment extends Fragment {
     TextView mParkingLotName;
     @BindView(R.id.updateDateTextView)
     TextView mUpdateTime;
+    @BindView(R.id.allspaces)
+    TextView mAllSpaces;
+    @BindView(R.id.usedspaces)
+    TextView mOccupiedSpaces;
+    @BindView(R.id.available)
+    TextView mAvailableSpaces;
 
     private EmelParkingLotResponse mParkingLot;
 
@@ -50,8 +56,15 @@ public class ParkingLotDetailFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_parking_lot_detail, container, false);
         ButterKnife.bind(this, view);
 
+        String maxCapacity = String.valueOf(mParkingLot.getMaxCapacity());
+        String occupiedLots = String.valueOf(mParkingLot.getOccupation());
+        int availableLots = Integer.parseInt(maxCapacity) - Integer.parseInt(occupiedLots);
+
         mParkingLotName.setText(mParkingLot.getName());
         mUpdateTime.setText(mParkingLot.getOccupationDate());
+        mAllSpaces.setText(maxCapacity);
+        mOccupiedSpaces.setText(occupiedLots);
+        mAvailableSpaces.setText(String.valueOf(availableLots));
 
         return view;
     }
