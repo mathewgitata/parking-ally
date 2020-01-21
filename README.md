@@ -1,11 +1,15 @@
-<h4 align="center">PARKING ALLY</h4>
-
-</p>
-
-
 # Parking Ally
 
 This is a utility app that aims at guiding motorists to discover parking areas whenever, wherever.
+
+# BDD
+| Input                                      | Behavior                                 | Output                                        |
+|--------------------------------------------|------------------------------------------|-----------------------------------------------|
+| The user launches the app                  | The app fetches the landing activity        | The user is presented with the landing page view |
+| The user follows either the SignUp or Login              | The app gets the specified activity           | The user is taken to the appropriate view        |
+| The user clicks on availed parking lots | The app shows the user the specific's parking lot's status | The user sees available spaces   |
+|User follows Account Settings navigation bar menu | App renders their registered information | User is shown the respective information|
+|User follows a view, on their respective information| App loads the edit account activity | User presented with dialogs to input their updated information |
 
 ### Prerequisites
 
@@ -36,26 +40,6 @@ To configure the ParkingAlly App follow these instructions.
 The Sign up/ Sign In screen will appear and you can now use the Parking Ally App during the demo.
 
 
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
 ## Built With
 
 * [Gradle](https://gradle.org/) - The build automation system used
@@ -65,6 +49,14 @@ Give an example
 ## Versioning
 
 ParkingAlly-v.1.0
+
+# Screenshots
+| ![<img src="/readme/01_landing_page.jpg"](/readme/01_landing_page.jpg)     | ![<img src="/readme/02_registration_page.jpg"](/readme/02_registration_page.jpg) | ![<img src="/readme/03_login_page.jpg"](/readme/03_login_page.jpg)   |
+|-------------------------------------------------------|-----------------------------------------------------|-------------------------------------------------------|
+| ![<img src="/readme/04_parking_lots.jpg"](/readme/04_parking_lots.jpg)     | ![<img src="/readme/05_account_details.jpg"](/readme/05_account_details.jpg)   | ![<img src="/readme/06_edit_details.jpg"](/readme/06_edit_details.jpg) |
+
+# Known bugs
+* None at the moment
 
 ## Authors
 
