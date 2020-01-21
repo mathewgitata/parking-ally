@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".ui.AccountSettingsActivity"
-            android:theme="@style/AppTheme"
+            android:parentActivityName=".ui.ParkingLotListActivity"
+            android:theme="@style/NoActionBar"
             android:label="Account Settings Activity"/>
         <activity
             android:name=".ui.ParkingLotDetailActivity"

@@ -2,7 +2,21 @@ package com.gitata.parkingally.models;
 
 public class User {
 
-    private String userID, email, firstName, lastName, phoneNumber;
+    private String userID;
+    private String email;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    private String image;
 
     public User() {
     }
