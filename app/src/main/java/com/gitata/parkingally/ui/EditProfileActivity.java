@@ -104,6 +104,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
     }
 
+    //Camera
     private void takePictureIntent() {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
@@ -111,6 +112,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
     }
 
+    //Gallery
     private void pickFromGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
@@ -146,8 +148,6 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void setProfilePhoto() {
-        //Create file metadata with property to delete
-
         mStorageRef.child(mCurrentUserID).getDownloadUrl().addOnSuccessListener(uri -> {
             String userPhotoLink = uri.toString();
             Map<String, Object> childUpates = new HashMap<>();

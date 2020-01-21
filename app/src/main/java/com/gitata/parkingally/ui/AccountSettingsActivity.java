@@ -25,6 +25,7 @@ import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class AccountSettingsActivity extends AppCompatActivity {
 
@@ -39,6 +40,17 @@ public class AccountSettingsActivity extends AppCompatActivity {
 
     @BindView(R.id.tv_email)
     TextView mEmail;
+
+    @OnClick(R.id.tv_sign_out)
+    public void signOutUser() {
+        FirebaseAuth.getInstance().signOut();
+
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+        AccountSettingsActivity.this.finish();
+
+    }
 
     //Firebase
     private DatabaseReference mUserDBRef;

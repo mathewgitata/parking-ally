@@ -34,6 +34,7 @@
         <activity android:name=".ui.RegistrationActivity" />
         <activity
             android:name=".ui.LandingPageActivity"
+            android:noHistory="true"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
