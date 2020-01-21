@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -128,13 +129,15 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
 
     private void registerUser(String email, final String firstName, final String lastName,
                               final String phoneNumber, String password) {
-        final ProgressBar mProgressBar = findViewById(R.id.progressBar);
-        mProgressBar.setVisibility(View.VISIBLE);
+        final ProgressDialog progressDialog = new ProgressDialog(this, R.style.AppCompatAlerDialogStyle);
+        progressDialog.setTitle("Registering");
+        progressDialog.setMessage("Welcome aboard...");
+        progressDialog.show();
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                mProgressBar.setVisibility(View.INVISIBLE);
+                progressDialog.dismiss();
                 if (!task.isSuccessful()) {
                     Log.d(TAG, task.getException().getLocalizedMessage());
                 } else {
@@ -148,8 +151,7 @@ public class RegistrationActivity extends AppCompatActivity implements View.OnCl
                             .addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    ProgressBar mProgressBar = findViewById(R.id.progressBar);
-                                    mProgressBar.setVisibility(View.INVISIBLE);
+                                    progressDialog.dismiss();
                                     if (task.isSuccessful()) {
                                         hideKeyboard(RegistrationActivity.this);
                                         createUserInFirebaseDb(newUser.getUid(), newUser.getEmail(), user.getFirstName(), user.getLastName(), user.getPhoneNumber());

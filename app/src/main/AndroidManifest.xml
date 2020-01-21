@@ -3,6 +3,7 @@
     package="com.gitata.parkingally">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".Application.App"
@@ -14,6 +15,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".ui.EditProfileActivity"
+            android:label="Edit Account"
             android:parentActivityName=".ui.AccountSettingsActivity"
             android:theme="@style/NoActionBar" />
         <activity

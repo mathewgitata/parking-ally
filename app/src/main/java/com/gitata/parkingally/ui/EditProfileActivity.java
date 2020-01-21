@@ -1,9 +1,11 @@
 package com.gitata.parkingally.ui;
 
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.InputType;
@@ -24,6 +26,9 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.gitata.parkingally.R;
 import com.gitata.parkingally.models.User;
+import com.gitata.parkingally.util.CircleTransformer;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.EmailAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
@@ -34,17 +39,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 
 public class EditProfileActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private final int REQUEST_IMAGE_CAPTURE = 1;
     private final int REQUEST_IMAGE_PICK = 2;
 
     //views
@@ -54,15 +62,18 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     private TextView mPhoneNumber;
     private TextView mEmailAddress;
     private TextView mPassword;
+    private TextView mEditPhoto;
 
     //Firebase
     private DatabaseReference mUserDBRef;
-    private StorageReference mStorageRef;
+    private StorageReference mProfilePhotosStorageRef;
     private String mCurrentUserID;
 
     private AlertDialog alertDialog;
+    private AlertDialog.Builder builder;
 
     private User currentUser;
+    private Uri filePath;
 
 
     @Override
@@ -84,6 +95,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         mPhoneNumber = findViewById(R.id.pNumber);
         mEmailAddress = findViewById(R.id.email);
         mPassword = findViewById(R.id.password);
+        mEditPhoto = findViewById(R.id.edit_photo);
 
         //onclick handlers
         mUserPhotoImageView.setOnClickListener(this);
@@ -97,22 +109,14 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
 
         //init Firebase
         mUserDBRef = FirebaseDatabase.getInstance().getReference().child("Users");
-        mStorageRef = FirebaseStorage.getInstance().getReference().child("Photos").child("Users");
-
-        //Populate the views initially
-        populateTheViews();
+        mProfilePhotosStorageRef = FirebaseStorage.getInstance().getReference().child("ProfilePhotos");
 
     }
 
-    //Camera
+    // TODO: Actualize image capture using a camera
     private void takePictureIntent() {
-        Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-        if (takePictureIntent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(takePictureIntent, REQUEST_IMAGE_CAPTURE);
-        }
     }
 
-    //Gallery
     private void pickFromGallery() {
         Intent photoPickerIntent = new Intent(Intent.ACTION_PICK);
         photoPickerIntent.setType("image/*");
@@ -122,75 +126,69 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_IMAGE_CAPTURE && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            assert extras != null;
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            mUserPhotoImageView.setImageBitmap(imageBitmap);
-
-            //convert Bitmap to byte array to store in firebase storage
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            assert imageBitmap != null;
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            setProfilePhoto();
-        } else if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            assert extras != null;
-            Bitmap imageBitmap = (Bitmap) extras.get("data");
-            mUserPhotoImageView.setImageBitmap(imageBitmap);
-
-            //convert bitmap to byte array to store in firebase storage
-            ByteArrayOutputStream stream = new ByteArrayOutputStream();
-            assert imageBitmap != null;
-            imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-            setProfilePhoto();
+        if (requestCode == REQUEST_IMAGE_PICK && resultCode == RESULT_OK) {
+            filePath = data.getData();
+            try {
+                Bitmap imageBitmap = MediaStore.Images.Media.getBitmap(getContentResolver(), filePath);
+                mUserPhotoImageView.setImageBitmap(imageBitmap);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+        //TODO: Actualize image capturing using camera here
+//        else if () {
+//
+//        }
+        setProfilePhoto();
     }
 
     private void setProfilePhoto() {
-        mStorageRef.child(mCurrentUserID).getDownloadUrl().addOnSuccessListener(uri -> {
-            String userPhotoLink = uri.toString();
-            Map<String, Object> childUpates = new HashMap<>();
-            childUpates.put("image", userPhotoLink);
-            mUserDBRef.child(mCurrentUserID).updateChildren(childUpates);
-        }).addOnFailureListener(e -> {
-            //error saving photo
-            Toast.makeText(EditProfileActivity.this, "Unable to upload profile photo right now. Please try again later.", Toast.LENGTH_SHORT).show();
+        if (filePath != null) {
+            final ProgressDialog progressDialog = new ProgressDialog(this, R.style.AppCompatAlerDialogStyle);
+            progressDialog.setTitle("Uploading");
+            progressDialog.setMessage("Just a sec...");
+            progressDialog.show();
+            StorageReference ref = mProfilePhotosStorageRef.child(mCurrentUserID.toString());
+            ref.putFile(filePath).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                    progressDialog.dismiss();
+                    Picasso.get()
+                            .load(currentUser.getProfilePhoto())
+                            .resize(mUserPhotoImageView.getMeasuredWidth(), mUserPhotoImageView.getMeasuredHeight())
+                            .centerCrop()
+                            .transform(new CircleTransformer())
+                            .into(mUserPhotoImageView);
+                    Log.d("EDIT_ACCT", "Uploaded succesfully");
 
-        });
-    }
-
-    private void populateTheViews() {
-        mUserDBRef.child(Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid()).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                currentUser = dataSnapshot.getValue(User.class);
-                try {
-                    assert currentUser != null;
-                    String userPhoto = currentUser.getImage();
-                    String firstName = currentUser.getFirstName();
-                    String lastName = currentUser.getLastName();
-                    String phoneNumber = currentUser.getPhoneNumber();
-                    phoneNumber = "+(254)" + "-" + phoneNumber.replaceFirst("^0+(?!$)", "");
-                    String email = currentUser.getEmail();
-
-                    Picasso.get().load(userPhoto).into(mUserPhotoImageView);
-                    mFirstName.setText(firstName);
-                    mLastName.setText(lastName);
-                    mPhoneNumber.setText(phoneNumber);
-                    mEmailAddress.setText(email);
-                    mPassword.setText("*******");
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    mProfilePhotosStorageRef.child(mCurrentUserID).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                        @Override
+                        public void onSuccess(Uri uri) {
+                            String userPhotoLink = uri.toString();
+                            Map<String, Object> childUpates = new HashMap<>();
+                            childUpates.put("profilePhoto", userPhotoLink);
+                            mUserDBRef.child(mCurrentUserID).updateChildren(childUpates);
+                        }
+                    });
                 }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+                    progressDialog.dismiss();
+                    Toast.makeText(EditProfileActivity.this, "Unable to upload profile photo right now. Please try again later." + e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                @Override
+                public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                    double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                    progressDialog.setMessage("Uploaded " + (int) progress + "%");
+                }
+            });
+        }
     }
+
 
     private void updateFirstName(String newFirstName) {
         Map<String, Object> childUpdates = new HashMap<>();
@@ -216,7 +214,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private void updateEmail(final String newEmail) {
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         AuthCredential credential = EmailAuthProvider
                 .getCredential("email", "password");
         assert user != null;
@@ -224,9 +222,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 .addOnCompleteListener(task -> {
                     Log.d("TAG", "User reauthenticated");
                     //change email address
-                    FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
-                    assert user1 != null;
-                    user1.updateEmail(newEmail)
+                    user.updateEmail(newEmail)
                             .addOnCompleteListener(task1 -> {
                                 if (task1.isSuccessful()) {
                                     Toast.makeText(EditProfileActivity.this, "Your changes have been updated succesfully", Toast.LENGTH_SHORT).show();
@@ -249,7 +245,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 .addOnCompleteListener(task -> {
                     Log.d("TAG", "User reauthenticated");
                     //change email address
-                    FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
+                    final FirebaseUser user1 = FirebaseAuth.getInstance().getCurrentUser();
                     assert user1 != null;
                     user1.updatePassword(newPassword)
                             .addOnCompleteListener(task1 -> {
@@ -266,19 +262,54 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     @Override
     protected void onStart() {
         super.onStart();
-        populateTheViews();
+        mUserDBRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                currentUser = dataSnapshot.getValue(User.class);
+                try {
+                    String firstName = currentUser.getFirstName();
+                    String lastName = currentUser.getLastName();
+                    String phoneNumber = currentUser.getPhoneNumber();
+                    phoneNumber = "+254" + "-" + phoneNumber.replaceFirst("^0+(?!$)", "");
+                    String email = currentUser.getEmail();
+                    mFirstName.setText(firstName);
+                    mLastName.setText(lastName);
+                    mPhoneNumber.setText(phoneNumber);
+                    mEmailAddress.setText(email);
+                    mPassword.setText("*******");
+
+                    String image = currentUser.getProfilePhoto();
+                    if (!image.equals(currentUser.getProfilePhoto())) {
+                        Picasso.get().
+                                load(currentUser.getProfilePhoto())
+                                .placeholder(R.drawable.ic_account_settings_person);
+
+                    } else {
+                        Picasso.get().
+                                load(currentUser.getProfilePhoto())
+                                .resize(mUserPhotoImageView.getMeasuredWidth(), mUserPhotoImageView.getMeasuredHeight())
+                                .transform(new CircleTransformer())
+                                .centerCrop().into(mUserPhotoImageView);
+                    }
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.imgProfilePhoto:
-                AlertDialog.Builder builder = new AlertDialog.Builder(EditProfileActivity.this);
-                builder.setTitle("Set profile photo");
-                builder.setPositiveButton("Gallery", (dialog, which) -> pickFromGallery());
-                builder.setNegativeButton("Camera", (dialog, which) -> takePictureIntent());
-                builder.create().show();
-
+                pickFromGallery();
                 break;
 
             case R.id.fname:
@@ -291,8 +322,11 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
                 input_fname.setWidth(500);
                 builder.setView(input_fname);
 
-                builder.setPositiveButton("SAVE", (dialog, which) -> {
+                builder.setPositiveButton("SAVE", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
 
+                    }
                 });
                 alertDialog = builder.create();
                 alertDialog.setOnShowListener(dialog -> {
@@ -467,3 +501,4 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         }
     }
 }
+

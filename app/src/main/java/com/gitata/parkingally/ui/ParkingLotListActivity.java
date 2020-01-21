@@ -8,8 +8,10 @@ import com.gitata.parkingally.R;
 import com.gitata.parkingally.adapters.ParkingLotListAdapter;
 import com.gitata.parkingally.models.EmelParkingLotResponse;
 import com.gitata.parkingally.models.NavBarItem;
+import com.gitata.parkingally.models.User;
 import com.gitata.parkingally.network.EmelParkingApi;
 import com.gitata.parkingally.network.EmelParkingClient;
+import com.gitata.parkingally.util.CircleTransformer;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -28,6 +30,14 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import androidx.drawerlayout.widget.DrawerLayout;
 
@@ -37,6 +47,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -51,17 +62,24 @@ import retrofit2.Response;
 
 public class ParkingLotListActivity extends AppCompatActivity implements View.OnClickListener {
     private DrawerLayout drawer;
+    private FirebaseAuth mAuth;
+    private DatabaseReference mUsersDBRef;
+    private User currentUser;
 
     @BindView(R.id.recycler_view)
     RecyclerView mRecyclerView;
     private ParkingLotListAdapter mAdapter;
     public ArrayList<EmelParkingLotResponse> mParkingLotsList = new ArrayList<>();
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_parking_lot_list);
         ButterKnife.bind(this);
+
+        mAuth = FirebaseAuth.getInstance();
+        mUsersDBRef = FirebaseDatabase.getInstance().getReference().child("Users");
 
         inflateViews();
 
@@ -89,6 +107,51 @@ public class ParkingLotListActivity extends AppCompatActivity implements View.On
             }
         });
     }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            mUsersDBRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    currentUser = dataSnapshot.getValue(User.class);
+                    try {
+                        NavigationView navigationView = findViewById(R.id.nav_view);
+                        View headerView = navigationView.getHeaderView(0);
+                        ImageView mUserPhotoImageView = headerView.findViewById(R.id.img_profile_photo);
+                        TextView mUserName = headerView.findViewById(R.id.tv_user_name);
+                        TextView mEmailAddress = headerView.findViewById(R.id.tv_email);
+
+                        String firstName = currentUser.getFirstName();
+                        String lastName = currentUser.getLastName();
+                        String name = firstName + " " + lastName;
+                        String email = currentUser.getEmail();
+                        String image = currentUser.getProfilePhoto();
+                        mUserName.setText(name);
+                        mEmailAddress.setText(email);
+
+                        if (!image.equals(currentUser.getProfilePhoto())) {
+                            Picasso.get().load(currentUser.getProfilePhoto()).placeholder(R.drawable.ic_nav_header_account);
+                        } else {
+                            Picasso.get().load(currentUser.getProfilePhoto()).transform(new CircleTransformer()).resize(mUserPhotoImageView.getMeasuredWidth(), mUserPhotoImageView.getMeasuredHeight()).centerCrop().into(mUserPhotoImageView);
+                        }
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
 
     private void inflateViews() {
         drawer = findViewById(R.id.drawer_layout);

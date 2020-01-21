@@ -8,6 +8,16 @@ public class User {
     private String lastName;
     private String phoneNumber;
 
+    public String getProfilePhoto() {
+        return profilePhoto;
+    }
+
+    public void setProfilePhoto(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
+    }
+
+    private String profilePhoto;
+
     public String getImage() {
         return image;
     }

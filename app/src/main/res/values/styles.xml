@@ -93,4 +93,10 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="AppCompatAlerDialogStyle" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
 </resources>

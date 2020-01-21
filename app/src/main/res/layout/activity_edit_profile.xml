@@ -47,11 +47,20 @@
 
             <ImageView
                 android:id="@+id/imgProfilePhoto"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
                 android:contentDescription="yourProfilePictureHere"
                 android:src="@drawable/ic_account_settings_person"
                 tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/edit_photo"
+                android:layout_width="wrap_content"
+                android:layout_toEndOf="@id/imgProfilePhoto"
+                android:layout_marginTop="100dp"
+                android:drawableStart="@drawable/ic_edit"
+                android:layout_height="wrap_content" />
 
             <View
                 android:id="@+id/divider1"

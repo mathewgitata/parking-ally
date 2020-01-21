@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.gitata.parkingally.R;
 import com.gitata.parkingally.models.User;
+import com.gitata.parkingally.util.CircleTransformer;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -101,6 +102,14 @@ public class AccountSettingsActivity extends AppCompatActivity {
                     mUserName.setText(userName);
                     mPhoneNumber.setText(phoneNumber);
                     mEmail.setText(email);
+
+                    String image = currentUser.getProfilePhoto();
+                    if (!image.equals(currentUser.getProfilePhoto())) {
+                        Picasso.get().load(currentUser.getProfilePhoto()).placeholder(R.drawable.ic_account_settings_person);
+
+                    } else {
+                        Picasso.get().load(currentUser.getProfilePhoto()).transform(new CircleTransformer()).resize(mProfilePhoto.getMeasuredWidth(), mProfilePhoto.getMeasuredHeight()).centerCrop().into(mProfilePhoto);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
