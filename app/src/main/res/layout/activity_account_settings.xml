@@ -22,6 +22,7 @@
         android:layout_below="@id/toolbar"
         android:layout_marginTop="22dp"
         android:contentDescription="@string/nav_header_desc"
+        android:onClick="toEditProfile"
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         app:srcCompat="@drawable/ic_account_settings_person" />
 
@@ -32,6 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/toolbar"
         android:layout_marginTop="22dp"
+        android:onClick="toEditProfile"
         android:text="@string/sample_user_name"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
@@ -41,7 +43,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tv_user_name"
-        android:layout_marginTop="@dimen/nav_header_vertical_spacing" />
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:onClick="toEditProfile" />
 
     <TextView
         android:id="@+id/tv_email"
@@ -49,7 +52,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_phone_number"
-        android:layout_marginTop="@dimen/nav_header_vertical_spacing" />
+        android:layout_marginTop="@dimen/nav_header_vertical_spacing"
+        android:onClick="toEditProfile" />
 
     <View
         android:id="@+id/divider1"

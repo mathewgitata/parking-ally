@@ -12,10 +12,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.AccountSettingsActivity"
+        <activity
+            android:name=".ui.EditProfileActivity"
+            android:parentActivityName=".ui.AccountSettingsActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.AccountSettingsActivity"
+            android:label="Account Settings Activity"
             android:parentActivityName=".ui.ParkingLotListActivity"
-            android:theme="@style/NoActionBar"
-            android:label="Account Settings Activity"/>
+            android:theme="@style/NoActionBar" />
         <activity
             android:name=".ui.ParkingLotDetailActivity"
             android:label="Reserve Parking Space" />
