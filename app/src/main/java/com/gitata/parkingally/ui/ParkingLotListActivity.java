@@ -1,5 +1,6 @@
 package com.gitata.parkingally.ui;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import com.gitata.parkingally.R;
@@ -11,8 +12,13 @@ import com.gitata.parkingally.network.EmelParkingClient;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import android.view.Gravity;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
@@ -56,11 +62,7 @@ public class ParkingLotListActivity extends AppCompatActivity implements View.On
         setContentView(R.layout.activity_parking_lot_list);
         ButterKnife.bind(this);
 
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
+        inflateViews();
 
         EmelParkingApi client = EmelParkingClient.getClient();
         Call<List<EmelParkingLotResponse>> call = client.getParkingLots();
@@ -87,11 +89,65 @@ public class ParkingLotListActivity extends AppCompatActivity implements View.On
         });
     }
 
+    private void inflateViews() {
+        drawer = findViewById(R.id.drawer_layout);
+        drawer.addDrawerListener(
+                new DrawerLayout.DrawerListener() {
+                    @Override
+                    public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+                    }
+
+                    @Override
+                    public void onDrawerOpened(@NonNull View drawerView) {
+
+                    }
+
+                    @Override
+                    public void onDrawerClosed(@NonNull View drawerView) {
+
+                    }
+
+                    @Override
+                    public void onDrawerStateChanged(int newState) {
+
+                    }
+                }
+        );
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        assert actionBar != null;
+        actionBar.setDisplayHomeAsUpEnabled(true);
+        actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+
+        setNavBarButtons();
+    }
+
+
     private void setNavBarButtons() {
         for (NavBarItem item : NavBarItem.values()) {
             TextView itemView = findViewById(item.getItemId());
             itemView.setOnClickListener(this);
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @SuppressLint("WrongConstant")
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            drawer.openDrawer(Gravity.START);
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 
