@@ -60,13 +60,22 @@
         <item name="android:textStyle">bold</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:textSize">15sp</item>
-        <item name="android:layout_toEndOf">@id/imgProfilePhoto</item>
+        <item name="android:layout_toEndOf">@id/img_profile_photo</item>
 
     </style>
 
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="account_settings">
+        <item name="android:fontFamily">@font/lucida_grande_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_toEndOf">@id/img_profile_photo</item>
+
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />

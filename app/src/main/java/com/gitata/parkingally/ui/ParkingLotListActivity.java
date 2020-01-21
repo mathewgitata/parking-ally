@@ -1,6 +1,7 @@
 package com.gitata.parkingally.ui;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.gitata.parkingally.R;
@@ -209,6 +210,7 @@ public class ParkingLotListActivity extends AppCompatActivity implements View.On
     }
 
     private void toAccountSettings() {
-        //TODO: Redirect user to account settings page
+        Intent toAccountSettings = new Intent(ParkingLotListActivity.this, AccountSettingsActivity.class);
+        startActivity(toAccountSettings);
     }
 }

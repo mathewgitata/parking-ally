@@ -29,4 +29,7 @@
     <string name="search">Search</string>
     <string name="title_activity_parking_lot_detail">ParkingLotDetailActivity</string>
     <string name="car_park_image">car park image</string>
+    <string name="sample_phone_number">+(254) 712345678</string>
+    <string name="vehicles">Vehicles</string>
+    <string name="sign_out">Sign Out</string>
 </resources>
