@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -107,13 +108,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void logInUser(String email, String password) {
-        final ProgressBar mProgressBar = findViewById(R.id.progressBar);
-        mProgressBar.setVisibility(View.VISIBLE);
+        final ProgressDialog mProgressDialog = new ProgressDialog(this, R.style.AppCompatAlerDialogStyle);
+        mProgressDialog.setMessage("Authenticating...");
+        mProgressDialog.show();
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                mProgressBar.setVisibility(View.INVISIBLE);
+                mProgressDialog.dismiss();
                 if (!task.isSuccessful()) {
                     Log.d(TAG, task.getException().getLocalizedMessage());
                 } else {

@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context="ui.EditProfileActivity">
+
+    <TextView
+        android:id="@+id/showAppName"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="@font/coquette_bold"
+        android:gravity="center_vertical"
+        android:paddingStart="10dp"
+        android:text="@string/app_name"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        tools:ignore="RtlSymmetry" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_below="@id/showAppName"
+        android:background="@color/colorPrimaryDark"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:titleTextColor="@color/white" />
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingBottom="@dimen/activity_vertical_margin">
+
+            <ImageView
+                android:id="@+id/imgProfilePhoto"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerHorizontal="true"
+                android:contentDescription="yourProfilePictureHere"
+                android:src="@drawable/ic_account_settings_person"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/edit_photo"
+                android:layout_width="wrap_content"
+                android:layout_toEndOf="@id/imgProfilePhoto"
+                android:layout_marginTop="100dp"
+                android:drawableStart="@drawable/ic_edit"
+                android:layout_height="wrap_content" />
+
+            <View
+                android:id="@+id/divider1"
+                android:layout_width="fill_parent"
+                android:layout_height="0.1dp"
+                android:layout_below="@id/imgProfilePhoto"
+                android:layout_marginTop="22dp"
+                android:background="@color/colorAccent" />
+
+            <TextView
+                android:id="@+id/tv_first_name"
+                style="@style/edit_account_headers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/divider1"
+                android:text="First Name"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/fname"
+                style="@style/edit_account_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_first_name"
+                android:text="Mathew"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv_second_name"
+                style="@style/edit_account_headers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fname"
+                android:text="Last Name"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/sname"
+                style="@style/edit_account_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_second_name"
+                android:text="Gitata"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv_phone_number"
+                style="@style/edit_account_headers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/sname"
+                android:text="@string/phone_number"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/pNumber"
+                style="@style/edit_account_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_phone_number"
+                android:text="@string/sample_phone_number"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv_email"
+                style="@style/edit_account_headers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/pNumber"
+                android:text="@string/email_address"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/email"
+                style="@style/edit_account_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_email"
+                android:text="@string/sample_email"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/tv_password"
+                style="@style/edit_account_headers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/email"
+                android:text="@string/password"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/password"
+                style="@style/edit_account_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tv_password"
+                android:text="***********"
+                tools:ignore="HardcodedText" />
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

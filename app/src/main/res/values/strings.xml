@@ -13,9 +13,23 @@
     <string name="forgot_password"><u>Forgot Your Password</u></string>
     <string name="input_error_password">Password input error</string>
     <string name="park_id">ID:</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="my_account">My Account</string>
+    <string name="history">Parking History</string>
+    <string name="payment">Payment</string>
+    <string name="help">Feedback</string>
+    <string name="legal">Legal</string>
+    <string name="sample_user_name">Parking Ally</string>
+    <string name="sample_email">email@parkingally.com</string>
+    <string name="search">Search</string>
+    <string name="title_activity_parking_lot_detail">ParkingLotDetailActivity</string>
     <string name="car_park_image">car park image</string>
-    <string name="last_updated_on">Last Updated On</string>
+    <string name="sample_phone_number">+(254) 712345678</string>
+    <string name="vehicles">Vehicles</string>
+    <string name="sign_out">Sign Out</string>
 </resources>

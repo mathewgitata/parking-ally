@@ -10,7 +10,8 @@
 
     <!-- Remove Action Bar-->
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
-        <item name="colorPrimaryDark">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowActionBar">false</item>
         <item name="android:windowNoTitle">true</item>
     </style>
@@ -44,6 +45,58 @@
     <!--Circular Progress bar theme -->
     <style name="CircularProgress" parent="Theme.AppCompat.Light">
         <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="nav_drawer_menu_item">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:height">48dp</item>
+        <item name="android:fontFamily">@font/helvetica_neue_medium</item>
+        <item name="android:background">?attr/selectableItemBackground</item>
+        <item name="android:paddingStart">10dp</item>
+    </style>
+
+    <style name="nav_header_account_info">
+        <item name="android:fontFamily">@font/helvetica_neue</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_toEndOf">@id/img_profile_photo</item>
+
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="account_settings">
+        <item name="android:fontFamily">@font/lucida_grande_regular</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_toEndOf">@id/img_profile_photo</item>
+
+    </style>
+
+    <style name="edit_account_headers">
+        <item name="android:fontFamily">@font/lucida_grande_regular</item>
+        <item name="android:textColor">@color/faded_black</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginTop">30dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+    <style name="edit_account_content">
+        <item name="android:fontFamily">@font/helvetica_neue_medium</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="AppCompatAlerDialogStyle" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:background">@color/colorAccent</item>
     </style>
 
 </resources>

@@ -3,6 +3,7 @@
     package="com.gitata.parkingally">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:name=".Application.App"
@@ -12,16 +13,30 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.ParkingLotDetailActivity" android:label="Reserve Parking Space" />
+        <activity
+            android:name=".ui.EditProfileActivity"
+            android:label="Edit Account"
+            android:parentActivityName=".ui.AccountSettingsActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.AccountSettingsActivity"
+            android:label="Account Settings Activity"
+            android:parentActivityName=".ui.ParkingLotListActivity"
+            android:theme="@style/NoActionBar" />
+        <activity
+            android:name=".ui.ParkingLotDetailActivity"
+            android:label="Reserve Parking Space" />
         <activity
             android:name=".ui.ParkingLotListActivity"
-            android:theme="@style/NoActionBar" />
+            android:label=""
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".ui.LoginActivity"
             android:theme="@style/NoActionBar" />
         <activity android:name=".ui.RegistrationActivity" />
         <activity
             android:name=".ui.LandingPageActivity"
+            android:noHistory="true"
             android:theme="@style/NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
