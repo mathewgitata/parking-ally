@@ -55,7 +55,7 @@ ParkingAlly-v.1.0
 |-------------------------------------------------------|-----------------------------------------------------|-------------------------------------------------------|
 | ![<img src="/readme/05_account_details.jpg"](/readme/05_account_details.jpg)  | ![<img src="/readme/06_edit_details.jpg"](/readme/06_edit_details.jpg) | ![<img src="/readme/04_parking_lots.jpg"](/readme/04_parking_lots.jpg)   |
 | --- | --- | --- |
-| ![<img src="/readme/07_reserve_parking_space.png"](/readme/07_reserve_parking_space.png) |
+| ![<img src="/readme/07_reserve_parking_space.jpg"](/readme/07_reserve_parking_space.jpg) |
 
 
 
